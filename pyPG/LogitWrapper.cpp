@@ -63,6 +63,7 @@ void rpg_gamma(double *x, double *n, double *z, int *num, int *trunc)
 
 
 
+//void rpg_devroye(double *x, int *n, double *z, int *xst, int *nst, int *zst, int *num)
 void rpg_devroye(double *x, int *n, double *z, int *num)
 {
     RNG r;
@@ -77,6 +78,11 @@ void rpg_devroye(double *x, int *n, double *z, int *num)
             x[i] = pg.draw(n[i], z[i], r);
         else
             x[i] = 0.0;
+
+        // if (n[i* *nst]!=0)
+        //     x[i* *xst] = pg.draw(n[i* *nst], z[i* *zst], r);
+        // else
+        //     x[i* *xst] = 0.0;
     }
 
 #ifdef USE_R

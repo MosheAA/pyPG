@@ -2,6 +2,9 @@ import _pyPG as __pyPG
 import numpy as _N
 import numbers as _nums
 
+###   Copyright 2014 Kensuke Arai, Scott 
+#
+#
 ## Draw PG(h, z)
 ##------------------------------------------------------------------------------
 #  rpg.gamma <- function(num=1, h=1, z=0.0, trunc=200)
@@ -42,7 +45,6 @@ def rpg_devroye(n, z, num=1, out=None):
         z = _N.ones(num, dtype=_N.float64) * z
 
     nA, zA, outA = _N.broadcast_arrays(n, z, out)
-
 
     __pyPG.rpg_devroye(outA, nA, zA, num)
 

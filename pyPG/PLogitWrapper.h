@@ -22,6 +22,7 @@
 
 extern "C" {
   // RPG
+  //void rpg_devroye(double *x, int *n, double *z, int *xst, int *nst, int *zst, int *num);
   void rpg_devroye(double *x, int *n, double *z, int *num);
 }
 

@@ -1,5 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
+// Copyright 2014 Kensuke Arai, Scott 
 // Copyright 2012 Nick Polson, James Scott, and Jesse Windle.
 
 // This file is part of BayesLogit.
@@ -26,7 +27,7 @@
 #include "PolyaGammaSP.h"
 #include <exception>
 #include <cstdio>
-#include <gsl/gsl_randist.h>
+//#include <gsl/gsl_randist.h>
 #include <omp.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -35,7 +36,7 @@
 
 static PyObject *SpamError;
 
-gsl_rng *rng;   // This doesn't have to be static.  Once loaded
+//gsl_rng *rng;   // This doesn't have to be static.  Once loaded
 vector<RNG*> vr;
 vector<PolyaGamma*> vpg;   // trunc == 1, for devroye
 vector<PolyaGammaAlt*> vpa;
@@ -46,20 +47,21 @@ vector<PolyaGammaSP*> vps;
 static PyObject *rpg_devroye(PyObject *self, PyObject *args)
 {
   PyArrayObject *n, *z, *x;
-  int num, i;
+  int num, i, xst, nst, zst;
 
+  //if (!PyArg_ParseTuple(args, "OOOiiii", &x, &n, &z, &xst, &nst, &zst, &num))    return NULL;
   if (!PyArg_ParseTuple(args, "OOOi", &x, &n, &z, &num))    return NULL;
   double *dx    = (double*)x->data;
   int    *dn    = (int*)n->data;
   double *dz    = (double*)z->data;
 
+  //rpg_devroye(dx, dn, dz, &xst, &nst, &zst, &num);
   rpg_devroye(dx, dn, dz, &num);
 
   Py_RETURN_NONE;
 }
 
-/*
-static PyObject *par_rpg_gamma(PyObject *self, PyObject *args)
+static PyObject *rpg_gamma(PyObject *self, PyObject *args)
 {
   PyArrayObject *h, *z, *x;
   int num, mxth, tid, i, trunc;
@@ -70,37 +72,10 @@ static PyObject *par_rpg_gamma(PyObject *self, PyObject *args)
   int    *dh    = (int*)h->data;
   double *dz    = (double*)z->data;
 
-  mxth = 1;
-
-#ifdef _OPENMP
-  mxth = omp_get_max_threads();
-#endif
-
-#pragma omp parallel shared(tid, vr, vpg) private(i) num_threads(mxth)
-  {
-#ifdef _OPENMP
-    tid = omp_get_thread_num();
-#endif
-
-#pragma omp for schedule(dynamic) nowait
-    for( i = 0; i < num; i++ )
-      {
-	if (dh[i]!=0.0)
-	  {
-	    vpt[tid]->set_trunc(trunc);
-	    dx[i] = vpt[tid]->draw_sum_of_gammas(dh[i], dz[i], *(vr[tid]));
-	  }
-	else
-	  {
-	    dx[i] = 0.0;
-	  }
-      }
-  }
-
   Py_RETURN_NONE;
 }
 
-
+/*
 static PyObject *rpg_gamma(PyObject *self, PyObject *args)
 {
   RNG r;

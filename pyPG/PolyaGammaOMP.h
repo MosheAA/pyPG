@@ -1,6 +1,6 @@
 // -*- mode: c++; c-basic-offset: 4; -*-
 
-#include "RNG.h"
+#include "RNG.hpp"
 #include "PolyaGammaHybrid.h"
 #include <exception>
 #include <stdio.h>

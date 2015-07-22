@@ -1,7 +1,7 @@
 // -*- mode: c++; c-basic-offset: 4; -*-
 
 #include "PolyaGammaOMP.h"
-#include "RNG.h"
+#include "RNG.hpp"
 #include <algorithm>
 #include <getpot>
 #include <vector>

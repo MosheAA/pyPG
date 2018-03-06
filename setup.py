@@ -17,7 +17,7 @@ from distutils.sysconfig import get_python_inc
 #  use --user  to install in
 #  to specify compiler, maybe set CC environment variable
 #  or python setup.py build --compiler=g++
-incdir1 = [get_python_inc(plat_specific=1), numpy.get_include(), "pyPG/include/RNG", "/usr/local/include"]
+incldir = [get_python_inc(plat_specific=1), numpy.get_include(), "pyPG/include/RNG", "/usr/local/include"]
 libdir = ["/usr/local/lib"]
 os.environ["CC"]  = "g++-6"
 os.environ["CXX"] = "g++-6"
@@ -27,7 +27,7 @@ os.environ["CXX"] = "g++-6"
 USE_OPENMP = False
 #  -fPIC meaningless in osx
 extra_compile_args = ["-fPIC", "-bundle", "-undefined dynamic_lookup", "-shared"]
-extra_link_args    = ["-lblas", "-llapack", "-lgsl"]
+extra_link_args    = ["-lgsl"]
 
 if "--use_openmp" in sys.argv:
     USE_OPENMP = True
@@ -55,9 +55,8 @@ print sources
 
 #  Output to be named _LogitWrapper.so
 module1 = Extension('pyPG/_pyPG',
-                    #libraries = ['gsl',],   #  needed this on Centos
-                    libraries = ['gsl', 'gslcblas'],
-                    include_dirs=incdir1,
+                    libraries = ['gsl'],
+                    include_dirs=incldir,
                     library_dirs=libdir,
                     extra_compile_args=extra_compile_args,
                     extra_link_args=extra_link_args,  #  linker args

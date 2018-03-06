@@ -17,9 +17,10 @@ from distutils.sysconfig import get_python_inc
 #  use --user  to install in
 #  to specify compiler, maybe set CC environment variable
 #  or python setup.py build --compiler=g++
-incdir1 = [get_python_inc(plat_specific=1), numpy.get_include(), "pyPG/include/RNG"]
-os.environ["CC"]  = "g++"
-os.environ["CXX"] = "g++"
+incdir1 = [get_python_inc(plat_specific=1), numpy.get_include(), "pyPG/include/RNG", "/usr/local/include"]
+libdir = ["/usr/local/lib"]
+os.environ["CC"]  = "g++-6"
+os.environ["CXX"] = "g++-6"
 
 ##  Handle OPENMP switch here
 #  http://stackoverflow.com/questions/677577/distutils-how-to-pass-a-user-defined-parameter-to-setup-py
@@ -57,6 +58,7 @@ module1 = Extension('pyPG/_pyPG',
                     #libraries = ['gsl',],   #  needed this on Centos
                     libraries = ['gsl', 'gslcblas'],
                     include_dirs=incdir1,
+                    library_dirs=libdir,
                     extra_compile_args=extra_compile_args,
                     extra_link_args=extra_link_args,  #  linker args
                     sources=sources)

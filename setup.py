@@ -18,6 +18,7 @@ from distutils.sysconfig import get_python_inc
 #  to specify compiler, maybe set CC environment variable
 #  or python setup.py build --compiler=g++
 incldir = [get_python_inc(plat_specific=1), numpy.get_include(), "pyPG/include/RNG", "/usr/local/include"]
+
 libdir = ["/usr/local/lib"]
 os.environ["CC"]  = "g++-6"
 os.environ["CXX"] = "g++-6"
@@ -26,7 +27,8 @@ os.environ["CXX"] = "g++-6"
 #  http://stackoverflow.com/questions/677577/distutils-how-to-pass-a-user-defined-parameter-to-setup-py
 USE_OPENMP = False
 #  -fPIC meaningless in osx
-extra_compile_args = ["-fPIC", "-bundle", "-undefined dynamic_lookup", "-shared"]
+#extra_compile_args = ["-fPIC", "-bundle", "-undefined dynamic_lookup", "-shared"]
+extra_compile_args = ["-fPIC", "-bundle", "-shared"]
 extra_link_args    = ["-lgsl"]
 
 if "--use_openmp" in sys.argv:
@@ -35,6 +37,9 @@ if "--use_openmp" in sys.argv:
     extra_link_args.append("-lgomp")
     iop = sys.argv.index("--use_openmp")
     sys.argv.pop(iop)
+
+extra_compile_args.extend(["-DNTHROW"])  #  Kensuke Arai needed to do this on MacBook Air using g++-6.  In PolyaGamma.cpp, block with std::invalid_argument causes error like "Symbol not found: __ZNSt16invalid_argumentC1EPKc" on import of pyPG.  
+
 
 #  may also need to set $LD_LIBRARY_PATH in order to use shared libgsl
 

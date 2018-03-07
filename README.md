@@ -7,12 +7,11 @@ pyPG is a set of python/cython wrappers around the C++ code originally written b
 
 To install, unpack pyPG in its own directory, and run the install script.
 
-`python setup.py install --use_openmp`
+`python setup.py install --use_openmp`.  This installs pyPG in python library under site-packages.  
+
+sd`python setup.py build --use_openmp`.  This installs pyPG in python library under the `build/..../` directory.  There will be a directory called pyPG, with contents `__init__.py`, and `_pyPG.so`.  If it is not desired to install into the python site-packages, user can copy this `pyPG` directory to any desired location, and included that location in the `PYTHONPATH` environment variable.
 
 If the C++ compiler doesn't support OpenMP, upgrade to one that does, or simply leave the `--use_openmp` flag off.  
 
 If compile fails, the `incldir` and `libdir` may need to be modified for your environment.
-
-
-
 

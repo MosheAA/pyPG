@@ -68,7 +68,11 @@ module1 = Extension('pyPG/pyPG_cpp_module',
                     sources=sources)
 setup(
     name='pyPG',
-    version='0.1.0',
+    version='0.93',
     packages=['pyPG'],
     ext_modules=[module1],
+    author="Kensuke Arai, Jesse Windell, Tim Whalen",
+    description="Python Wrapper for Jesse Windell's Polya Gamma sampler",
+    email="kensuke.y.arai@gmail.com",
+    url="http://github.com/AraiKensuke/pyPG"
 )

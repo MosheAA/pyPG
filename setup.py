@@ -59,7 +59,7 @@ sources=['pyPG/PLogitWrapper.cpp',
 print sources
 
 #  Output to be named _LogitWrapper.so
-module1 = Extension('pyPG/_pyPG',
+module1 = Extension('pyPG/pyPG_cpp_module',
                     libraries = ['gsl'],
                     include_dirs=incldir,
                     library_dirs=libdir,
@@ -67,7 +67,7 @@ module1 = Extension('pyPG/_pyPG',
                     extra_link_args=extra_link_args,  #  linker args
                     sources=sources)
 setup(
-    name='pyPolyaGamma',
+    name='pyPG',
     version='0.1.0',
     packages=['pyPG'],
     ext_modules=[module1],

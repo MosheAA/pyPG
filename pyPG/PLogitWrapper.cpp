@@ -223,13 +223,13 @@ static PyMethodDef SpamMethods[] = {
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 
-PyMODINIT_FUNC init_pyPG(void)
+PyMODINIT_FUNC initpyPG_cpp_module(void)
 {
   //  This gets called when "import spam" called.
   PyObject *m;
   int i;
 
-  m = Py_InitModule("_pyPG", SpamMethods);
+  m = Py_InitModule("pyPG_cpp_module", SpamMethods);
   if (m == NULL)
     return;
 

@@ -1,4 +1,4 @@
-import _pyPG as __pyPG
+import pyPG_cpp_module
 import numpy as _N
 import numbers as _nums
 
@@ -46,7 +46,7 @@ def rpg_devroye(n, z, num=1, out=None):
 
     nA, zA, outA = _N.broadcast_arrays(n, z, out)
 
-    __pyPG.rpg_devroye(outA, nA, zA, num)
+    pyPG_cpp_module.rpg_devroye(outA, nA, zA, num)
 
     if out.shape[0] > 1:
        return out
@@ -62,7 +62,7 @@ def rpg_gamma(h, z, num=1, out=None, trunc=200):
         raise Exception("Problems with input.  Either both arrays of same length, or both scalaras")
     if out == None:
         out = _N.empty(num)
-    __lw.par_rpg_gamma(out, h, z, num, trunc)
+    pyPG_cpp_module.par_rpg_gamma(out, h, z, num, trunc)
     if num == 1:
         return out[0]
     return out

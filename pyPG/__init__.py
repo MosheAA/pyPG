@@ -1,4 +1,7 @@
-import pyPG_cpp_module
+#  for 2.7, import pyPG_cpp_module
+import pyPG.pyPG_cpp_module   #  need to do this for 3.6
+#  https://stackoverflow.com/questions/34753206/init-py-cant-find-local-modules
+
 import numpy as _N
 import numbers as _nums
 

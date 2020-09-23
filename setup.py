@@ -29,7 +29,7 @@ USE_OPENMP = False
 #  -fPIC meaningless in osx
 #extra_compile_args = ["-fPIC", "-bundle", "-undefined dynamic_lookup", "-shared"]
 extra_compile_args = ["-fPIC", "-bundle", "-shared"]
-extra_link_args    = ["-lgsl"]
+extra_link_args    = ["-lgsl", "-lgslcblas"]
 
 if "--use_openmp" in sys.argv:
     USE_OPENMP = True
@@ -56,7 +56,6 @@ sources=['pyPG/PLogitWrapper.cpp',
          'pyPG/HHWrapper.cpp',
          'pyPG/include/RNG/GRNG.cpp', 
          'pyPG/include/RNG/RNG.cpp']
-print sources
 
 #  Output to be named _LogitWrapper.so
 module1 = Extension('pyPG/pyPG_cpp_module',

@@ -20,15 +20,20 @@ from distutils.sysconfig import get_python_inc
 incldir = [get_python_inc(plat_specific=1), numpy.get_include(), "pyPG/include/RNG", "/usr/local/include"]
 
 libdir = ["/usr/local/lib"]
-os.environ["CC"]  = "g++-6"
-os.environ["CXX"] = "g++-6"
+
+gplusplus = "g++"
+if sys.platform == "darwin":
+    gplusplus = "g++-6"   #  OMP doesn't work if g++
+
+os.environ["CC"]  = gplusplus
+os.environ["CXX"] = gplusplus
 
 ##  Handle OPENMP switch here
 #  http://stackoverflow.com/questions/677577/distutils-how-to-pass-a-user-defined-parameter-to-setup-py
 USE_OPENMP = False
 #  -fPIC meaningless in osx
 #extra_compile_args = ["-fPIC", "-bundle", "-undefined dynamic_lookup", "-shared"]
-extra_compile_args = ["-fPIC", "-bundle", "-shared"]
+extra_compile_args = ["-fPIC", "-shared"]
 extra_link_args    = ["-lgsl", "-lgslcblas"]
 
 if "--use_openmp" in sys.argv:

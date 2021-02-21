@@ -48,7 +48,7 @@ vector<PolyaGammaSP*> vps;
 static PyObject *rpg_devroye(PyObject *self, PyObject *args)
 {
   PyArrayObject *n, *z, *x;
-  int num, i, xst, nst, zst;
+  int num;//, i, xst, nst, zst;
 
   //if (!PyArg_ParseTuple(args, "OOOiiii", &x, &n, &z, &xst, &nst, &zst, &num))    return NULL;
   if (!PyArg_ParseTuple(args, "OOOi", &x, &n, &z, &num))    return NULL;
@@ -65,13 +65,10 @@ static PyObject *rpg_devroye(PyObject *self, PyObject *args)
 static PyObject *rpg_gamma(PyObject *self, PyObject *args)
 {
   PyArrayObject *h, *z, *x;
-  int num, mxth, tid, i, trunc;
+  int num, trunc;
 
   if (!PyArg_ParseTuple(args, "OOOii", &x, &h, &z, &num, &trunc))
     return NULL;
-  double *dx    = (double*)x->data;
-  int    *dh    = (int*)h->data;
-  double *dz    = (double*)z->data;
 
   Py_RETURN_NONE;
 }

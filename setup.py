@@ -25,7 +25,7 @@ gplusplus = "g++"
 if sys.platform == "darwin":
     gplusplus = "g++-6"   #  OMP doesn't work if g++
 
-os.environ["CC"]  = gplusplus
+#os.environ["CC"]  = gplusplus
 os.environ["CXX"] = gplusplus
 
 ##  Handle OPENMP switch here
